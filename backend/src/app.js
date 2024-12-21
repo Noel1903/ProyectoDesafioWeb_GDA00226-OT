@@ -4,6 +4,8 @@ require('dotenv').config();
 
 const ProductsRoutes = require('./routes/ProductsRoutes');
 const UsersRoutes = require('./routes/UsersRoutes');
+const OrderRoutes = require('./routes/OrderRoutes');
+const StatesRoutes = require('./routes/StatesRoutes');
 
 
 
@@ -14,6 +16,8 @@ app.use(express.json());
 
 app.use('/', ProductsRoutes);
 app.use('/', UsersRoutes);
+app.use('/', OrderRoutes);
+app.use('/', StatesRoutes);
 
 app.get('/', (req, res) => {
     res.send('Hello World');

@@ -1,4 +1,4 @@
-const {createCategoryProduct, createProduct,modifyCategoryProduct,modifyProduct} = require('../models/ProductsModel');
+const {createCategoryProduct, createProduct,modifyCategoryProduct,modifyProduct,deleteCategoryProduct,deleteProduct,getCategoriesProducts,getProducts} = require('../models/ProductsModel');
 
 const createCategory = async (req, res) => {
     const {name} = req.body;
@@ -42,4 +42,42 @@ const modifyProducto = async (req,res) => {
 }
 
 
-module.exports = { createCategory, newProduct,modifyCategory,modifyProducto };
+const deleteCategoria = async (req, res) => {
+    const {id_category} = req.body;
+    try {
+        const response = await deleteCategoryProduct(id_category);
+        res.status(200).json({message: response});
+    } catch (error) {
+        res.status(500).json({error: 'Error al eliminar la categoría del producto'});
+    }
+}
+
+const deleteProducto = async (req, res) => {
+    const {id_product} = req.body;
+    try {
+        const response = await deleteProduct(id_product);
+        res.status(200).json({message: response});
+    } catch (error) {
+        res.status(500).json({error: 'Error al eliminar el producto'});
+    }
+}
+
+const getCategorias = async (req, res) => {
+    try {
+        const response = await getCategoriesProducts();
+        res.status(200).json({data: response});
+    } catch (error) {
+        res.status(500).json({error: 'Error al obtener las categorías de productos'});
+    }
+}
+
+const getProductos = async (req, res) => {
+    try {
+        const response = await getProducts();
+        res.status(200).json({data: response});
+    } catch (error) {
+        res.status(500).json({error: 'Error al obtener los productos'});
+    }
+}
+
+module.exports = { createCategory, newProduct,modifyCategory,modifyProducto,deleteCategoria,deleteProducto,getCategorias,getProductos };

@@ -1,4 +1,4 @@
-const {createUserSystem, createClientSystem,modifyClientSystem,modifyUserSystem} = require('../models/UsersModel');
+const {createUserSystem, createClientSystem,modifyClientSystem,modifyUserSystem,blockUserSystem,getUsers} = require('../models/UsersModel');
 const bcrypt = require('bcrypt');
 
 const createUser = async (req, res) => {
@@ -36,4 +36,15 @@ const createClient = async (req, res) => {
 }
 
 
-module.exports = { createUser, createClient, modifyUser, modifyClient };
+const getUsuarios = async (req,res) => {
+    const result = await getUsers();
+    res.json(result);
+}
+
+const bloquearUsuario = async (req,res) => {
+    const {id_usuario} = req.body;
+    const result = await blockUserSystem(id_usuario);
+    res.json(result);
+}
+
+module.exports = { createUser, createClient, modifyUser, modifyClient, bloquearUsuario, getUsuarios };
