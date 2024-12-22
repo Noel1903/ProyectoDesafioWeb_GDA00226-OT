@@ -51,5 +51,29 @@ const modifyClientSystem = async (id_cliente,razon_social,nombre_comercial,direc
 }   
 
 
+const blockUserSystem = async (id_usuario) => {
+    try {
+        const query = `EXEC bloquearUsuario @idUser = ${id_usuario}`;
+        const pool = await connectDatabase();
+        const result = await pool.request().query(query);
+        pool.close();
+        return result['recordset'][0][''];
+    }catch(error){
+        console.error('Error al bloquear el usuario', error);
+    }
+}
 
-module.exports = { createUserSystem, createClientSystem, modifyUserSystem, modifyClientSystem };
+const getUsers = async () => {
+    try {
+        const query = `SELECT * FROM Usuarios`;
+        const pool = await connectDatabase();
+        const result = await pool.request().query(query);
+        pool.close();
+        return result['recordset'];
+    }catch(error){
+        console.error('Error al obtener los usuarios', error);
+    }
+}
+
+
+module.exports = { createUserSystem, createClientSystem, modifyUserSystem, modifyClientSystem, blockUserSystem, getUsers };
