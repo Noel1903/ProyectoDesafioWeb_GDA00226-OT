@@ -6,6 +6,9 @@ const ProductsRoutes = require('./routes/ProductsRoutes');
 const UsersRoutes = require('./routes/UsersRoutes');
 const OrderRoutes = require('./routes/OrderRoutes');
 const StatesRoutes = require('./routes/StatesRoutes');
+const AuthRoutes = require('./routes/AuthRoutes');
+
+
 
 
 
@@ -18,6 +21,7 @@ app.use('/', ProductsRoutes);
 app.use('/', UsersRoutes);
 app.use('/', OrderRoutes);
 app.use('/', StatesRoutes);
+app.use('/', AuthRoutes);
 
 app.get('/', (req, res) => {
     res.send('Hello World');
